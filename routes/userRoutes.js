@@ -126,6 +126,21 @@ router.route("/users/:id/skills")
         }
     });
 
+
+// user
+
+router.get("/users", async (req, res) => {
+    try {
+        const users = await User.findAll({
+            where: { role: "Service Provider" }
+        });
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(500).json({ message: "Error Fetching Users", error: error.message });
+    }
+});
+
+
 // Get Certificates
 router.get("/users/:id/certificates", async (req, res) => {
     const { id } = req.params;
